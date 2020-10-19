@@ -1,0 +1,23 @@
+name: login_socket_io
+description: login_socket_io
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.8.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^0.1.2
+  provider: ^3.2.0
+  flutter_socket_io: 0.6.0
+  email_validator: ^1.0.5
+  
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
