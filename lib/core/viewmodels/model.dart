@@ -10,8 +10,8 @@ import '../../exceptions/model_exception.dart';
 class Model extends ChangeNotifier {
   BuildContext rootBuildContext;
 
-  ValidationItens _email = ValidationItens('marcio_runner@hotmail.com', null);
-  ValidationItens _password = ValidationItens('@#runner', null);
+  ValidationItens _email = ValidationItens('teste@gmail.com', null);
+  ValidationItens _password = ValidationItens('teste', null);
   var _user = '';
 
   ValidationItens get email => _email;
@@ -87,9 +87,8 @@ class Model extends ChangeNotifier {
             _isValidate = true;
             notifyListeners();
           } else {
-            _isValidate = false;
-            _email = ValidationItens(_email.value, "O email não localizado !!!");
-            notifyListeners();
+            var modelException = ModelException("OPERATION_NOT_ALLOWED");
+            return throw modelException;
           }
         });
       });
