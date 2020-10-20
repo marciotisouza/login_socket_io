@@ -109,4 +109,10 @@ class Model extends ChangeNotifier {
 
     return Future.value();
   }
+
+  void logout() {
+    _isValidate = false;
+    notifyListeners();
+  }
+
 }

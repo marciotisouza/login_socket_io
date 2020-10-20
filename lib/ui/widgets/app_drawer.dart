@@ -34,8 +34,7 @@ class _AppDrawerState extends State<AppDrawer> {
             leading: Icon(Icons.exit_to_app),
             title: Text('Sair'),
             onTap: () {
-              model.isValidate(false);
-              Navigator.pushNamedAndRemoveUntil(context, AppRoutes.AUTH_HOME, (Route<dynamic> route) => false );
+              Provider.of<Model>(context, listen: false).logout();
             },
           ),
         ],
