@@ -3,7 +3,12 @@ import 'package:provider/provider.dart';
 import '../../core/viewmodels/model.dart';
 import '../../utils/app_routes.dart';
 
-class AppDrawer extends StatelessWidget {
+class AppDrawer extends StatefulWidget {
+  @override
+  _AppDrawerState createState() => _AppDrawerState();
+}
+
+class _AppDrawerState extends State<AppDrawer> {
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<Model>(context, listen: false);
@@ -29,9 +34,8 @@ class AppDrawer extends StatelessWidget {
             leading: Icon(Icons.exit_to_app),
             title: Text('Sair'),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed(
-                AppRoutes.AUTH_HOME,
-              );    
+              model.isValidate(false);
+              Navigator.pushNamedAndRemoveUntil(context, AppRoutes.AUTH_HOME, (Route<dynamic> route) => false );
             },
           ),
         ],

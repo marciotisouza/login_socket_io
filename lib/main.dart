@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => Model(),
       child: MaterialApp(
-        initialRoute: "/",
+        initialRoute: AppRoutes.AUTH_HOME,
         debugShowCheckedModeBanner: false,
         routes: {
           AppRoutes.AUTH_HOME: (ctx) => LoginHome(),

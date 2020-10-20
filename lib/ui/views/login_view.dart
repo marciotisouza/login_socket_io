@@ -7,7 +7,6 @@ import '../shared/globals.dart';
 import '../widgets/button_widget.dart';
 import '../widgets/textfield_widget.dart';
 import '../widgets/wave_widget.dart';
-import '../../utils/app_routes.dart';
 
 class LoginView extends StatefulWidget {
   @override
@@ -27,9 +26,8 @@ class _LoginViewState extends State<LoginView> {
         actions: <Widget>[
           FlatButton(
             onPressed: () {
-              Navigator.of(context).pushReplacementNamed(
-                AppRoutes.AUTH_HOME,
-              );            },
+              Navigator.of(context, rootNavigator: true).pop('dialog');
+            },
             child: Text('Fechar'),
           )
         ],

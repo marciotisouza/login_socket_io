@@ -11,7 +11,7 @@ class Model extends ChangeNotifier {
   BuildContext rootBuildContext;
 
   ValidationItens _email = ValidationItens('teste@gmail.com', null);
-  ValidationItens _password = ValidationItens('teste', null);
+  ValidationItens _password = ValidationItens('teste123', null);
   var _user = '';
 
   ValidationItens get email => _email;
@@ -45,9 +45,9 @@ class Model extends ChangeNotifier {
       _email = ValidationItens(value, null);
     } else {
       if (mostrar == true) {
-        _email = ValidationItens(null, "O email não é válido !!!");
+        _email = ValidationItens(value, "O email não é válido !!!");
       } else {
-        _email = ValidationItens(null, null);
+        _email = ValidationItens(value, null);
       }
     }
     _isValid = isValidate;
@@ -60,9 +60,9 @@ class Model extends ChangeNotifier {
     if (value.length < 6) {
       if (mostrar == true) {
         _password =
-            ValidationItens(null, "A senha tem que ter no minimo 6 caracteres");
+            ValidationItens(value, "A senha tem que ter no minimo 6 caracteres");
       } else {
-        _password = ValidationItens(null, null);
+        _password = ValidationItens(value, null);
       }
       isValidate = false;
     } else {
@@ -77,8 +77,14 @@ class Model extends ChangeNotifier {
   }
 
   Future<void> _authenticate() async {
-    if (this.isValidEmail(_email.value, true) == true &&
-        this.isValidPassword(_password.value, true) == true) {
+    var search = true;
+    if (this.isValidEmail(_email.value, true) == false ){
+        search = false;
+    } 
+    if( this.isValidPassword(_password.value, true) == false) {
+        search = false;
+    }
+    if( search == true ){
       await connector.connectToServer(() async {
         await connector.validate(_email.value, _password.value, (inStatus) {
           var _response = jsonDecode(inStatus);
@@ -87,14 +93,12 @@ class Model extends ChangeNotifier {
             _isValidate = true;
             notifyListeners();
           } else {
+            _isValidate = false;
             var modelException = ModelException("OPERATION_NOT_ALLOWED");
             return throw modelException;
           }
         });
       });
-    } else {
-      var modelException = ModelException("OPERATION_NOT_ALLOWED");
-      return throw modelException;
     }
   }
 
