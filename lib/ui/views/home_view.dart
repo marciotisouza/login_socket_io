@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:provider/provider.dart';
-import '../../core/viewmodels/model.dart';
-import "../widgets/app_drawer.dart";
+import 'package:login_socket_io/core/viewmodels/model.dart';
+import "package:login_socket_io/ui/widgets/app_drawer.dart";
 
 class HomeView extends StatelessWidget {
   @override

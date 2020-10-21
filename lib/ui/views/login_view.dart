@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../exceptions/model_exception.dart';
-import '../../core/viewmodels/model.dart';
-import '../shared/globals.dart';
-import '../widgets/button_widget.dart';
-import '../widgets/textfield_widget.dart';
-import '../widgets/wave_widget.dart';
+import 'package:login_socket_io/exceptions/model_exception.dart';
+import 'package:login_socket_io/core/viewmodels/model.dart';
+import 'package:login_socket_io/ui/shared/globals.dart';
+import 'package:login_socket_io/ui/widgets/button_widget.dart';
+import 'package:login_socket_io/ui/widgets/textfield_widget.dart';
+import 'package:login_socket_io/ui/widgets/wave_widget.dart';
 
 class LoginView extends StatefulWidget {
   @override
@@ -21,14 +21,14 @@ class _LoginViewState extends State<LoginView> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text('Falha no Login !'),
+        title: Text('Login failed !'),
         content: Text(msg),
         actions: <Widget>[
           FlatButton(
             onPressed: () {
               Navigator.of(context, rootNavigator: true).pop('dialog');
             },
-            child: Text('Fechar'),
+            child: Text('Close'),
           )
         ],
       ),
@@ -47,7 +47,7 @@ class _LoginViewState extends State<LoginView> {
     } on ModelException catch (error) {
       _showErrorDialog(error.toString(), model, context);
     } catch (error) {
-      _showErrorDialog(error.toString(), model, context);
+      _showErrorDialog("An unexpected error has occurred !", model, context);
     }
     setState(() {
       _isLoading = false;
@@ -135,7 +135,7 @@ class _LoginViewState extends State<LoginView> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       TextFieldWidget(
-                        hintText: 'Senha',
+                        hintText: 'Password',
                         errorText: model.password.error,
                         initialValue: model.password.value,
                         obscureText: model.isVisible ? false : true,
@@ -151,7 +151,7 @@ class _LoginViewState extends State<LoginView> {
                         height: 10.0,
                       ),
                       Text(
-                        'Esqueceu a senha?',
+                        'Forgot password?',
                         style: TextStyle(
                           color: Global.mediumBlue,
                         ),
@@ -165,7 +165,7 @@ class _LoginViewState extends State<LoginView> {
                     CircularProgressIndicator()
                   else
                     ButtonWidget(
-                      title: 'Entrar',
+                      title: 'Log in',
                       hasBorder: false,
                       onTap: _submit,
                     ),

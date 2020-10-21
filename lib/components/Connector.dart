@@ -12,7 +12,7 @@ SocketIO _io;
 
 /// Connect to the server.  Called once from LoginDialog.
 ///
-Future<void> connectToServer(final Function inCallback) async {
+Future<void> connectToServer() async {
 
   print("## Connector.connectToServer(): serverURL = $serverURL");
   // Connect to server and when the connect mesage comes back, call the specified callback.
@@ -21,9 +21,6 @@ Future<void> connectToServer(final Function inCallback) async {
       print("## Connector.connectToServer(): callback(1): inData = $inData");
       if (inData == "connect") {
         print("## Connector.connectToServer(): callback: Connected to server");
-        // Hook up message listeners.
-        // Call the callback so the app can continue to start up.
-        inCallback();
       }
     }
   );
@@ -35,7 +32,6 @@ _io = SocketIOManager().createSocketIO(serverURL, "/", query: "", socketStatusCa
     print("## Connector.connectToServer(): callback(2): inData = $inData");
     if (inData == "connect") {
       print("## Connector.connectToServer(): callback: Connected to server");
-      inCallback();
     }
   }
 );

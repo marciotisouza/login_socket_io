@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../core/viewmodels/model.dart';
-import '../../utils/app_routes.dart';
+import 'package:login_socket_io/core/viewmodels/model.dart';
+import 'package:login_socket_io/utils/app_routes.dart';
 
 class AppDrawer extends StatefulWidget {
   @override
@@ -16,7 +16,7 @@ class _AppDrawerState extends State<AppDrawer> {
       child: Column(
         children: <Widget>[
           AppBar(
-            title: Text('Bem vindo ${model.user}!'),
+            title: Text('Welcome ${model.user}!'),
             automaticallyImplyLeading: false,
           ),
           Divider(),
@@ -32,7 +32,7 @@ class _AppDrawerState extends State<AppDrawer> {
           Divider(),
           ListTile(
             leading: Icon(Icons.exit_to_app),
-            title: Text('Sair'),
+            title: Text('Exit'),
             onTap: () {
               Provider.of<Model>(context, listen: false).logout();
             },

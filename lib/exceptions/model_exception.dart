@@ -1,10 +1,12 @@
 class ModelException implements Exception {
   static const Map<String, String> errors = {
-    "OPERATION_NOT_ALLOWED": "Operação não permitida!",
-    "TOO_MANY_ATTEMPTS_TRY_LATER": "Tente mais tarde!",
-    "EMAIL_NOT_FOUND": "E-mail não encontrado!",
-    "INVALID_PASSWORD": "Senha inválida!",
-    "USER_DISABLED": "Usuário desativado!",
+    "OPERATION_NOT_ALLOWED": "Operation not allowed!",
+    "TOO_MANY_ATTEMPTS_TRY_LATER": "Try later!",
+    "EMAIL_NOT_FOUND": "Email not found!",
+    "INVALID_PASSWORD": "invalid password!",
+    "USER_DISABLED": "User disabled!",
+    "INVALID_EMAIL": "Invalid email!",
+    "INCONSISTENT_DATA": "Inconsistent Data!",
   };
 
   final String key;
@@ -16,7 +18,7 @@ class ModelException implements Exception {
     if(errors.containsKey(key)) {
       return errors[key];
     } else {
-      return "Ocorreu um erro na autenticação!";
+      return "An authentication error has occurred!";
     }
   }
 }
