@@ -1,5 +1,4 @@
 import 'dart:async';
-import "dart:convert";
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -59,8 +58,8 @@ class Model extends ChangeNotifier {
     var isValidate = true;
     if (value.length < 6) {
       if (mostrar == true) {
-        _password = ValidationItens(
-            value, "Password must be at least 6 characters !");
+        _password =
+            ValidationItens(value, "Password must be at least 6 characters !");
       } else {
         _password = ValidationItens(value, null);
       }
@@ -77,22 +76,29 @@ class Model extends ChangeNotifier {
 
   Future<void> _authenticate() async {
     var search = true;
-    if (this.isValidEmail(_email.value, true) == false) {
-      search = false;
-      var modelException = ModelException("INVALID_EMAIL");
-      throw modelException;
-    }
-    if (this.isValidPassword(_password.value, true) == false) {
-      search = false;
-      var modelException = ModelException("INVALID_PASSWORD");
-      throw modelException;
-    }
-    if (search == true) {
-      await connector.connectToServer();
-      await connector.validate(_email.value, _password.value, (inStatus) {
-        var response = jsonDecode(inStatus);
-        resposta(response);
-      });
+    try {
+      if (this.isValidEmail(_email.value, true) == false) {
+        search = false;
+        var modelException = ModelException("INVALID_EMAIL");
+        throw modelException;
+      }
+      if (this.isValidPassword(_password.value, true) == false) {
+        search = false;
+        var modelException = ModelException("INVALID_PASSWORD");
+        throw modelException;
+      }
+      if (search == true) {
+        await connector.validate(_email.value, _password.value)
+        .then((data) {
+          print(data[0]['status']);
+          print("Validate recieved from server : $data");
+          resposta(data[0]);
+        });
+      }
+    } on ModelException catch (_) {
+      rethrow;
+    } catch (e) {
+      rethrow;
     }
   }
 
@@ -108,6 +114,12 @@ class Model extends ChangeNotifier {
   }
 
   Future<void> tryAutoLogin() async {
+    await connector.connectToServer();
+    List envio = [
+      "envio",
+      {"type": "mensagem", "mensagem": "envio da mensagem"}
+    ];
+    await connector.enviarMesamgem(envio);
     if (isValidate) {
       return Future.value();
     }
@@ -119,5 +131,4 @@ class Model extends ChangeNotifier {
     _isValidate = false;
     notifyListeners();
   }
-
 }

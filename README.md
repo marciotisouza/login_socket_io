@@ -20,6 +20,7 @@ Search sources:
 - [Animated Login](https://github.com/gdrtrts/animated-login)
 - [Flutter Validation With Provider](https://github.com/nhandrew/validationprovider)
 - [Flutter Chat](https://github.com/Apress/practical-flutter/tree/master/ch_07%2B08/flutter_chat)
+- [Adhara_socket_io](https://pub.dev/packages/adhara_socket_io)
 
 Note:
 

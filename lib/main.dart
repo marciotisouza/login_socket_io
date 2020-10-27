@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import './ui/views/home_view.dart';
 import './ui/views/login_home.dart';
 import './core/viewmodels/model.dart';
@@ -7,7 +8,13 @@ import './utils/app_routes.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
